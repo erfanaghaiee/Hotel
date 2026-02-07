@@ -5,6 +5,6 @@ roomnumber,check in date,check out date,username,total price,status
 103,2/13/2026,2/15/2026,erfan,1000000,cancelled
 202,2/10/2026,2/13/2026,abcd,2400000,active
 104,2/1/2026,2/13/2026,hamiirze,3600000,active
-101,1/24/2026,1/26/2026,hba,600000,active
-103,1/23/2026,1/25/2026,taha_azizi,1000000,cancelled
+101,1/24/2026,1/26/2026,hba,600000,completed
+103,1/23/2026,1/25/2026,taha_azizi,1000000,completed
 204,2/13/2026,2/16/2026,sb,1500000,active

@@ -7,9 +7,9 @@ import pandas as pd
 
 
 # فایل هایی که با انها کار میکنیم
-file_sign=r'C:\Users\Arapardaz\Desktop\proje hotel\sign.csv'
-file_room=r'C:\Users\Arapardaz\Desktop\proje hotel\rooms.csv'
-file_date_reserve=r'C:\Users\Arapardaz\Desktop\proje hotel\reservation.csv'
+file_sign=r'C:\Users\Arapardaz\Desktop\proje_hotel\sign.csv'
+file_room=r'C:\Users\Arapardaz\Desktop\proje_hotel\rooms.csv'
+file_date_reserve=r'C:\Users\Arapardaz\Desktop\proje_hotel\reservation.csv'
 
 
 

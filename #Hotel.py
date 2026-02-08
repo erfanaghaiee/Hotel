@@ -7,9 +7,9 @@ import pandas as pd
 
 
 # فایل هایی که با انها کار میکنیم
-file_sign=r'C:\Users\Arapardaz\Desktop\proje_hotel\sign.csv'
-file_room=r'C:\Users\Arapardaz\Desktop\proje_hotel\rooms.csv'
-file_date_reserve=r'C:\Users\Arapardaz\Desktop\proje_hotel\reservation.csv'
+file_sign='sign.csv'
+file_room='rooms.csv'
+file_date_reserve='reservation.csv'
 
 
 
@@ -322,11 +322,11 @@ while True:
                                                                             writer.writerow([room_choice,check_in_date,check_out_date,username,total_price,room_status])
                                                                         
                                                                         # تغییر پول حساب کاربر بعد از رزرو و ذخیره ان در فایل مربوطه
-                                                                        df=pd.read_csv(r'C:\Users\Arapardaz\Desktop\proje hotel\sign.csv')
+                                                                        df=pd.read_csv('sign.csv')
                                                                         
                                                                         df.loc[(df['username'] == username) , 'money']=new_money
                                                                         
-                                                                        df.to_csv(r'C:\Users\Arapardaz\Desktop\proje hotel\sign.csv' , index=False)
+                                                                        df.to_csv('sign.csv' , index=False)
                                                                         
                                                                         
                                                         
@@ -349,11 +349,11 @@ while True:
                                                                         elif charge=='yes':
                                                                             how_much=float(input('how much (toman):'))
 
-                                                                            df=pd.read_csv(r'C:\Users\Arapardaz\Desktop\proje hotel\sign.csv')
+                                                                            df=pd.read_csv('sign.csv')
                                                                             
                                                                             df.loc[df['username'] == username , 'money']+=how_much
                                                                             
-                                                                            df.to_csv(r'C:\Users\Arapardaz\Desktop\proje hotel\sign.csv' , index=False)
+                                                                            df.to_csv('sign.csv' , index=False)
                                                                             
                                                                             print('Thank you')
                                                                             print()
@@ -431,6 +431,7 @@ while True:
                             my_list.append(my_reserve)
                     if len(my_list)==0:
                         print('you did not have any active reserve')
+                        break
                     else:    
                         print('your active reserve:')
                         print()
@@ -477,21 +478,21 @@ while True:
     
                                             # تغییر به حالت کنسل
                                         
-                                            df=pd.read_csv(r'C:\Users\Arapardaz\Desktop\proje hotel\reservation.csv')
+                                            df=pd.read_csv('reservation.csv')
                                         
                                             df.loc[(df['roomnumber'] == int(r_number)) & (df['username']== username ),'status'] = 'cancelled'
                                         
-                                            df.to_csv(r'C:\Users\Arapardaz\Desktop\proje hotel\reservation.csv' , index=False)
+                                            df.to_csv('reservation.csv' , index=False)
                                         
                                             ########################################################################################
                                         
                                             #تغییر پول حساب کاربر بعد از لغو رزرو و ذخیره ان در فایل مربوطه
                                         
-                                            df=pd.read_csv(r'C:\Users\Arapardaz\Desktop\proje hotel\sign.csv')
+                                            df=pd.read_csv('sign.csv')
                                                                         
                                             df.loc[(df['username'] == username) , 'money']+=back_money
                                                                         
-                                            df.to_csv(r'C:\Users\Arapardaz\Desktop\proje hotel\sign.csv' , index=False)
+                                            df.to_csv('sign.csv' , index=False)
                                         
                                             with open (file_sign , 'r') as f:
                                                 # چاپ پول حساب کاربر

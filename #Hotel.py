@@ -15,7 +15,7 @@ file_date_reserve='reservation.csv'
 
 # کلاسی برای اتاق های هتل و تبدیل ویژگی های اتاق ها به رشته
 class Rooms:
-    def __init__(self,room_number,room_type,price,facilities,capacity):
+    def __init__(self,room_number,room_type,price,facilities,capacity,total_rating=0, rating_count=0):
         self.roomnumber=room_number
         self.roomtype=room_type
         price=price.strip()
@@ -23,15 +23,22 @@ class Rooms:
         self.facilities=facilities
         self.capacity=capacity
         
-        
+        self.total_rating = float(total_rating)
+        self.rating_count = int(rating_count)
         
     def total_cost(self,stay_duration):
         return self.price * stay_duration
     
+    def average_rating(self):
+        if self.rating_count == 0:
+            return "No rating"
+        return round(self.total_rating / self.rating_count, 1)
+    
         
             
     def __str__(self):
-        return f'Room {self.roomnumber} , type:{self.roomtype} , price:{self.price} , facilities:{self.facilities} , capacity:{self.capacity} '
+        avg = self.average_rating()
+        return f'Room {self.roomnumber} , type:{self.roomtype} , price:{self.price} , facilities:{self.facilities} , capacity:{self.capacity} , Rating: {avg} ⭐ '
     
 # کلاسی برای اطلاعات رزرو و تبدیل انها به یک رشته
 class Reserve:
@@ -155,7 +162,7 @@ while True:
                         else:
                             pass
             print('-----------------------------------------------')
-            request=input('what do you want?(reservation , my_history , cencel):').lower()
+            request=input('what do you want?(reservation , my_history , cencel , rate):').lower()
             print()
             if request=='reservation':
                 room_list=[]
@@ -165,8 +172,8 @@ while True:
                         rooms=csv.reader(f) 
                         next(rooms) #عبور از سطر اول
                         for row in rooms:
-                            if len(row) >= 5:
-                                new_room=Rooms(row[0],row[1],row[2],row[3],row[4])
+                            if len(row) >= 7:
+                                new_room=Rooms(row[0],row[1],row[2],row[3],row[4],row[5],row[6])
                                 room_list.append(new_room)
                         print('available rooms:')
                         for i in room_list:
@@ -523,7 +530,45 @@ while True:
                                 print('**room not found**')
                                 print()         
                     
-                    
+            elif request == 'rate':
+                room_to_rate = input('Enter the room number you want to rate: ')
+                
+                # چک کردن اینکه آیا کاربر واقعاً در این اتاق اقامت داشته و تمام شده است
+                df_res = pd.read_csv(file_date_reserve)
+                valid_stay = df_res[(df_res['username'] == username) & 
+                                    (df_res['roomnumber'] == int(room_to_rate)) & 
+                                    (df_res['status'] == 'completed')]
+                
+                if not valid_stay.empty:
+                    try:
+                        score = float(input("How much do you rate this room? (1 to 5): "))
+                        if 1 <= score <= 5:
+                            # به‌روزرسانی فایل اتاق‌ها
+                            df_rooms = pd.read_csv(file_room)
+                            # پیدا کردن ردیف اتاق
+                            room_idx = df_rooms.index[df_rooms['room number'] == int(room_to_rate)].tolist()[0]
+                            
+                            # اضافه کردن امتیاز
+                            df_rooms.at[room_idx, 'total_rating'] += score
+                            df_rooms.at[room_idx, 'rating_count'] += 1
+                            
+                            new_avg = df_rooms.at[room_idx, 'total_rating'] / df_rooms.at[room_idx, 'rating_count']
+                            df_rooms.at[room_idx, 'average_rating'] = round(new_avg, 1)
+                            
+                            df_rooms.to_csv(file_room, index=False)
+                            print("Thank you! Your rating has been recorded.")
+                            print()
+                        else:
+                            print("Error: Score must be between 1 and 5.")
+                            print()
+                    except ValueError:
+                        print("Invalid input! Please enter a number.")
+                        print()
+                else:
+                    print("You can only rate rooms where your stay is 'completed'.")
+                    print()
+            
+                  
                     
                         
             else:

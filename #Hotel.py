@@ -118,7 +118,7 @@ while True:
         while len(password)<8:
             print('your password is weak pleas change it (the number of characters is small).')
             password=input('enter a good password:')
-        money=float(input('enter your account money:'))
+        money=float(input('enter your first account money:'))
         
         print()
         print('thank you for sign up')

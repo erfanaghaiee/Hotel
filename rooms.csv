@@ -1,9 +1,9 @@
 room number,room type,price,facilities,capacity,total_rating,rating_count,average_rating
-101,single,300000,TV-fridge,1,0,0,0
-102,double,500000,TV-fridge,2,0,0,0
-103,double,500000,TV-fridge,2,4,1,4
-104,single,300000,fridge-wifi,1,0,0,0
-201,suite,800000,TV-fridge-wifi,4,0,0,0
-202,suite,800000,TV-fridge-wifi,4,0,0,0
-203,suite,800000,TV-fridge-wifi,3,0,0,0
+101,single,300000,TV-fridge,1,4.0,1,4.0
+102,double,500000,TV-fridge,2,0.0,0,0.0
+103,double,500000,TV-fridge,2,4.0,1,4.0
+104,single,300000,fridge-wifi,1,0.0,0,0.0
+201,suite,800000,TV-fridge-wifi,4,0.0,0,0.0
+202,suite,800000,TV-fridge-wifi,4,0.0,0,0.0
+203,suite,800000,TV-fridge-wifi,3,0.0,0,0.0
 204,double,500000,TV-fridge,2,3.5,1,3.5
